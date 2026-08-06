@@ -18,7 +18,7 @@ def store_acc(username, password):
 def register():
     username = input("Enter your username: ")
     if check_exist_user(username):
-        print("Account already exists.")
+        print("Account already exists.")    
         return
 
     password = input("Enter your password: ")
