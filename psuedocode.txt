@@ -1,0 +1,24 @@
+Register pseudocode
+
+Function check_exist_user(username)
+    Open "account.txt" For reading
+    If file does not exist then
+        Return FALSE
+    Endif
+
+    For each line in file
+        stored_username # the first value in line
+        If stored_username = username then
+            Return TRUE
+        Endif
+    Endif
+EndFunction
+
+
+
+
+
+
+Function store_acc(username,password)
+    Open "account.txt" For appending
+    Write 
