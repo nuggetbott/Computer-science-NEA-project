@@ -1,5 +1,3 @@
-Register pseudocode
-
 Function check_exist_user(username)
     Open "account.txt" For reading
     If file does not exist then
@@ -11,26 +9,63 @@ Function check_exist_user(username)
         If stored_username = username then
             Return TRUE
         Endif
-    Endif
+    EndFor
+
+    Return FALSE
 EndFunction
 
 
-Procedure store_acc(username,password)
+Procedure store_acc(username, password)
     Open "account.txt" For appending
         Write username , password
 EndProcedure
 
+
 Function register()
     Input username
-    If check_exist_user(username)
-        Output Account already exist
-        EndFunction
+    If check_exist_user(username) then
+        Output "Account already exist"
+        Return
     Endif
     Input password
-    store_acc(username,password)
-    Output account created successfully
+    store_acc(username, password)
+    Output "Account created successfully"
 EndFunction
 
-Register()
+
+Function login()
+    Input username
+    Input password
+
+    Open "account.txt" For reading
+    If file does not exist then
+        Output "Invalid username or password."
+        Return FALSE
+    Endif
+
+    For each line in file
+        stored_username # the first value in line
+        stored_password # the second value in line
+        If stored_username = username AND stored_password = password then
+            Output "Login successful."
+            Return TRUE
+        Endif
+    EndFor
+
+    Output "Invalid username or password."
+    Return FALSE
+EndFunction
+
+
+
+Input option # "register" or "login"
+If option = "register" then
+    register()
+Elseif option = "login" then
+    login()
+Else
+    Output "Invalid option"
+Endif
+
 
 
