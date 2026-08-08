@@ -25,5 +25,25 @@ def register():
     store_acc(username, password)
     print("Account created successfully.")
 
+def login():
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
 
-register()
+    try:
+        with open("account.txt", "r") as f:
+            for line in f:
+                stored_username, stored_password = line.strip().split(",")
+                if stored_username == username and stored_password == password:
+                    print("Login successful.")
+                    return True
+    except FileNotFoundError:
+        pass
+
+    print("Invalid username or password.")
+    return False
+
+option = input("Do you want to register or login? (register/login): ").strip().lower()
+if option == "register":
+    register()
+elif option == "login":
+    login()

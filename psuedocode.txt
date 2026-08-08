@@ -15,10 +15,22 @@ Function check_exist_user(username)
 EndFunction
 
 
-
-
-
-
-Function store_acc(username,password)
+Procedure store_acc(username,password)
     Open "account.txt" For appending
-    Write 
+        Write username , password
+EndProcedure
+
+Function register()
+    Input username
+    If check_exist_user(username)
+        Output Account already exist
+        EndFunction
+    Endif
+    Input password
+    store_acc(username,password)
+    Output account created successfully
+EndFunction
+
+Register()
+
+
