@@ -22,7 +22,7 @@ EndFunction
 
 
 Procedure store_acc(username, password)
-    hashed_password # hash_password(password)
+    hashed_password = hash_password(password)
     Open "account.txt" For appending
         Write username , hashed_password
 EndProcedure
@@ -43,7 +43,7 @@ EndFunction
 Function login()
     Input username
     Input password
-    hashed_password # hash_password(password)
+    hashed_password = hash_password(password)
 
     Open "account.txt" For reading
     If file does not exist then
