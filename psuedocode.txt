@@ -1,3 +1,9 @@
+Function hash_password(password)
+    hashed # SHA256 hash of password
+    Return hashed
+EndFunction
+
+
 Function check_exist_user(username)
     Open "account.txt" For reading
     If file does not exist then
@@ -16,8 +22,9 @@ EndFunction
 
 
 Procedure store_acc(username, password)
+    hashed_password # hash_password(password)
     Open "account.txt" For appending
-        Write username , password
+        Write username , hashed_password
 EndProcedure
 
 
@@ -36,6 +43,7 @@ EndFunction
 Function login()
     Input username
     Input password
+    hashed_password # hash_password(password)
 
     Open "account.txt" For reading
     If file does not exist then
@@ -45,8 +53,8 @@ Function login()
 
     For each line in file
         stored_username # the first value in line
-        stored_password # the second value in line
-        If stored_username = username AND stored_password = password then
+        stored_hashed_password # the second value in line
+        If stored_username = username AND stored_hashed_password = hashed_password then
             Output "Login successful."
             Return TRUE
         Endif
@@ -57,7 +65,6 @@ Function login()
 EndFunction
 
 
-
 Input option # "register" or "login"
 If option = "register" then
     register()
@@ -66,6 +73,3 @@ Elseif option = "login" then
 Else
     Output "Invalid option"
 Endif
-
-
-
