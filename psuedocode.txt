@@ -3,6 +3,14 @@ Function hash_password(password)
     Return hashed
 EndFunction
 
+Function validation(username,password)
+    If username = "" or password = "" then
+        Output "Username or password cannot be empty"
+        Return FALSE
+    Endif
+    Return TRUE
+EndFunction
+
 
 Function check_exist_user(username)
     Open "account.txt" For reading
@@ -29,20 +37,23 @@ EndProcedure
 
 
 Function register()
-    Input username
+    username # value from entry_username
     If check_exist_user(username) then
         Output "Account already exist"
         Return
     Endif
-    Input password
+    password # value from entry_password
+    If validation(username,password) = FALSE then
+        Return
+    Endif
     store_acc(username, password)
     Output "Account created successfully"
 EndFunction
 
 
 Function login()
-    Input username
-    Input password
+    username # value from entry_username
+    password # value from entry_password
     hashed_password = hash_password(password)
 
     Open "account.txt" For reading
@@ -64,12 +75,19 @@ Function login()
     Return FALSE
 EndFunction
 
+#Main program -- GUI setup
+Create window titled "Login/Register"
 
-Input option # "register" or "login"
-If option = "register" then
-    register()
-Elseif option = "login" then
-    login()
-Else
-    Output "Invalid option"
-Endif
+Create label "username" at row 0, column 0 
+Create label "password" at row 1 , column 0
+
+Create entry_username at row 0, column 1
+Create entry_password at row 1 , column 1 # masked with "*"
+
+Create button "register" at row 2
+     On click, call register()
+
+Create button "login" at row 3
+    On click, call login()
+
+Start window main loop
