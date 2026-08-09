@@ -19,6 +19,9 @@ def validation(username, password):
     if not username or not password:
         messagebox.showerror("Error", "Username or password cannot be empty.")
         return False
+    if " " in username or " " in password:
+        messagebox.showerror("Error", "Username or password cannot contain spaces.")
+        return False
     return True
 
 def store_acc(username, password):
