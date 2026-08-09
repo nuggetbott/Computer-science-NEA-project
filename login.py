@@ -15,6 +15,11 @@ def check_exist_user(username):
         pass
     return False
 
+def validation(username, password):
+    if not username or not password:
+        messagebox.showerror("Error", "Username or password cannot be empty.")
+        return False
+    return True
 
 def store_acc(username, password):
     hashed_password = hash_password(password)
@@ -30,6 +35,8 @@ def register():
         return
 
     password = entry_password.get()
+    if not validation(username, password):
+        return
     store_acc(username, password)
     messagebox.showinfo("Success", "Account created successfully.")
 
@@ -58,8 +65,8 @@ tk.Label(root,text="password").grid(row=1, column=0, padx=10, pady=10)
 
 entry_username = tk.Entry(root)
 entry_password = tk.Entry(root, show="*")
-entry_username.grid(row=0, column=1, padx=10, pady=10)
 
+entry_username.grid(row=0, column=1, padx=10, pady=10)
 entry_password.grid(row=1, column=1, padx=10, pady=10)
 
 button = tk.Button(root, text="register", width=25, command=register)
