@@ -1,3 +1,5 @@
+# Psuedocode for login and register
+
 Function hash_password(password)
     hashed # SHA256 hash of password
     Return hashed
@@ -91,3 +93,32 @@ Create button "login" at row 3
     On click, call login()
 
 Start window main loop
+
+
+
+
+
+# Psuedocode for face tracking
+Function get_frame()
+    frame # get frame from webcame
+    Return frame
+EndFunction
+
+Function detect_face()
+    grey_scale # convert frame to grey scale
+    face_region # using a face detection model
+
+    If no face_region found then
+        Return No face detected
+    Endif
+
+    Return face_region
+EndFunction
+
+Function get_landmarks(face_region)
+    landmarks # locate coordinates for eyes , eyebrows , nose and mouth
+    Return landmarks
+EndFunction
+
+Function eyebrow_raised()
+     

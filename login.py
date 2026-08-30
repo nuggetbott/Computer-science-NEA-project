@@ -22,6 +22,9 @@ def validation(username, password):
     if " " in username or " " in password:
         messagebox.showerror("Error", "Username or password cannot contain spaces.")
         return False
+    if "," in username or "," in password:
+        messagebox.showerror("Error", "Username or password cannot contain commas.")
+        return False
     return True
 
 def store_acc(username, password):
@@ -31,15 +34,21 @@ def store_acc(username, password):
 
 
 def register():
-
     username = entry_username.get()
+    password = entry_password.get()
+    confirm_password = entry_confirm_password.get()
+
+    if not validation(username, password):
+        return
+
+    if password != confirm_password:
+        messagebox.showerror("Error", "Passwords do not match.")
+        return
+
     if check_exist_user(username):
         messagebox.showerror("Error", "Account already exists.")
         return
 
-    password = entry_password.get()
-    if not validation(username, password):
-        return
     store_acc(username, password)
     messagebox.showinfo("Success", "Account created successfully.")
 
@@ -54,26 +63,31 @@ def login():
                 stored_username, stored_password = line.strip().split(",")
                 if stored_username == username and stored_password == hashed_password:
                     messagebox.showinfo("Success", "Login successful.")
+                    print("Login result: True")
                     return True
     except FileNotFoundError:
         pass
 
     messagebox.showerror("Error", "Invalid username or password.")
+    print("Login result: False")
     return False
 
 root = tk.Tk()
 root.title("Login/Register")
 tk.Label(root,text="username").grid(row=0, column=0, padx=10, pady=10)
 tk.Label(root,text="password").grid(row=1, column=0, padx=10, pady=10)
+tk.Label(root,text="confirm password").grid(row=2, column=0, padx=10, pady=10)
 
 entry_username = tk.Entry(root)
 entry_password = tk.Entry(root, show="*")
+entry_confirm_password = tk.Entry(root, show="*")
 
 entry_username.grid(row=0, column=1, padx=10, pady=10)
 entry_password.grid(row=1, column=1, padx=10, pady=10)
+entry_confirm_password.grid(row=2, column=1, padx=10, pady=10)
 
 button = tk.Button(root, text="register", width=25, command=register)
-button.grid(row=2, column=0, columnspan=2, pady=10)
-button = tk.Button(root, text="login", width=25, command=login)
 button.grid(row=3, column=0, columnspan=2, pady=10)
+button = tk.Button(root, text="login", width=25, command=login)
+button.grid(row=4, column=0, columnspan=2, pady=10)
 root.mainloop()
