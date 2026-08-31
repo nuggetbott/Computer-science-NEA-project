@@ -25,7 +25,16 @@ options = vision.FaceLandmarkerOptions(
     output_face_blendshapes = True,
     output_facial_transformation_matrixes = True
 )
-
+def draw_landmark(frame,result,no):
+    if not result.face_landmarks:
+        return
+    landmarks = result.face_landmarks[0]
+    h,w,_ = frame.shape
+    pixel_x = int(landmarks[no].x*w) # turn the normalised value into actual frame width
+    pixel_y = int(landmarks[no].y*h) # turn the normalised value into actual farm length
+    cv2.circle(frame, (pixel_x,pixel_y),1,(0,255,0),-1)
+    return
+    
 def detect_angle(result):
     if result.face_landmarks:
         landmarks = result.face_landmarks[0]
@@ -36,7 +45,14 @@ def detect_angle(result):
         angle = math.degrees(math.atan2(diff_y,diff_x))
         return angle
     return None
-
+def detect_eyebrow_raised(result):
+    if result.face_landmarks:
+        landmarks = result.face_landmarks[0]
+        eye = landmarks[65]
+        eyebrow = landmarks[145]
+        eyebrow_gap = eye.y - eyebrow.y
+        return eyebrow_gap
+    return None
 with vision.FaceLandmarker.create_from_options(options) as landmarker:
     cap = cv2.VideoCapture(0) # Opens the webcam
     if not cap.isOpened():
@@ -44,11 +60,22 @@ with vision.FaceLandmarker.create_from_options(options) as landmarker:
         exit()
     try:
         while True:
-            sucess, frame = cap.read() # read the webcam frame
+            sucess, frame = cap.read()
             if not sucess:
                 break
-            cv2.imshow("Webcam",frame) # Opens a window called Webcam and display frame
-            if cv2.waitKey(1) & 0xFF == ord("q"): # Creates a delay for cv2 to update , 
+
+            rgb_color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_color)
+            timestamp = int(time.time() * 1000)
+            result = landmarker.detect_for_video(mp_image, timestamp)
+
+            draw_landmark(frame, result, 65)
+            draw_landmark(frame, result, 145)
+
+            cv2.imshow("Webcam", frame)
+            print(detect_angle(result))
+
+            if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
             rgb_color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # converts cv2 BGR colour to RGB for face landmarker
