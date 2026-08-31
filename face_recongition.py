@@ -50,7 +50,9 @@ def detect_eyebrow_raised(result):
         landmarks = result.face_landmarks[0]
         eye = landmarks[65]
         eyebrow = landmarks[145]
-        eyebrow_gap = eye.y - eyebrow.y
+        eyebrow_gap = (eyebrow.y - eye.y)*100
+        if eyebrow_gap > 8 :
+            print("eyebrow raised")
         return eyebrow_gap
     return None
 with vision.FaceLandmarker.create_from_options(options) as landmarker:
@@ -73,8 +75,7 @@ with vision.FaceLandmarker.create_from_options(options) as landmarker:
             draw_landmark(frame, result, 145)
 
             cv2.imshow("Webcam", frame)
-            print(detect_angle(result))
-
+            print(detect_eyebrow_raised(result))
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
