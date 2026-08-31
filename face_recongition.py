@@ -28,5 +28,11 @@ with vision.FaceLandmarker.create_from_options(options) as landmarker:
         cv2.imshow("Webcam",frame) # Opens a window called Webcam and display frame
         if cv2.waitKey(1) & 0xFF == ord("q"): # Creates a delay for cv2 to update , 
             break
+
+        rgb_color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # converts cv2 BGR colour to RGB for face landmarker
+        mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_color)
+        timestamp = int(time.time()*1000) # creates a time reference for mediapipe and converts it into miliseconds.
+        result = landmarker.detect_for_video(mp_image,timestamp)
+
     cap.release()
     cv2.destroyAllWindows()
