@@ -22,3 +22,11 @@ with vision.FaceLandmarker.create_from_options(options) as landmarker:
         print("Error: Could not open webcam.")
         exit()
     while True:
+        sucess, frame = cap.read() # read the webcam frame
+        if not sucess:
+            break
+        cv2.imshow("Webcam",frame) # Opens a window called Webcam and display frame
+        if cv2.waitKey(1) & 0xFF == ord("q"): # Creates a delay for cv2 to update , 
+            break
+    cap.release()
+    cv2.destroyAllWindows()
