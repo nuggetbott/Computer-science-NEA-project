@@ -122,3 +122,148 @@ EndFunction
 
 Function eyebrow_raised()
      
+
+
+#core gameplay
+Constant move_speed
+Constant volume_threshold        # sound volume above this = charging
+Constant tilt_threshold          # tilt below this = no aim change / no movement
+Constant max_charge_time         # cap on how long the spring can charge
+Constant min_jump_force
+Constant max_jump_force
+Constant gravity
+Constant ground_level
+
+
+character.x = start_x
+character.y = ground_level
+character_x_velocity = 0
+character_y_velocity = 0
+character_is_on_ground = TRUE
+character_is_charging = FALSE
+charge_time = 0
+aim_angle = 0
+
+
+Function get_tilt_direction()
+    direction # "left", "right" or "none" - from face tracking, compared against tilt_threshold
+    Return direction
+EndFunction
+
+
+Function get_tilt_angle()
+    angle # raw head tilt angle in degrees - from face tracking
+    Return angle
+EndFunction
+
+
+Function get_sound_volume()
+    volume # current microphone volume level - from sound tracking
+    Return volume
+EndFunction
+
+
+Procedure move_character(tilt_direction)
+    If character_is_charging = FALSE AND character_is_on_ground = TRUE then
+        If tilt_direction = "left" then
+            character.x = character.x - move_speed
+        Elseif tilt_direction = "right" then
+            character.x = character.x + move_speed
+        Endif
+    Endif
+EndProcedure
+
+
+Procedure update_charge(volume, tilt_angle)
+    If volume > volume_threshold then
+        character_is_charging = TRUE
+        aim_angle = tilt_angle          # aim updates continuously while charging
+
+        If charge_time < max_charge_time then
+            charge_time = charge_time + 1
+        Endif
+    Else
+        If character_is_charging = TRUE then
+            launch_character()
+        Endif
+    Endif
+EndProcedure
+
+
+Procedure launch_character()
+    charge_ratio = charge_time / max_charge_time
+    launch_force = min_jump_force + (charge_ratio * (max_jump_force - min_jump_force))
+
+    character_y_velocity = -launch_force * cos(aim_angle)
+    character_x_velocity = launch_force * sin(aim_angle)
+
+    character_is_charging = FALSE
+    character_is_on_ground = FALSE
+    charge_time = 0
+EndProcedure
+
+
+Procedure apply_gravity()
+    character_y_velocity = character_y_velocity + gravity
+EndProcedure
+
+
+Procedure update_character()
+    If character_is_on_ground = FALSE then
+        apply_gravity()
+        character.x = character.x + character_x_velocity
+        character.y = character.y + character_y_velocity
+
+        If character.y >= ground_level then
+            character.y = ground_level
+            character_x_velocity = 0
+            character_y_velocity = 0
+            character_is_on_ground = TRUE
+        Endif
+    Endif
+EndProcedure
+
+
+Function check_collision(character, object)
+    If character.x, character.y overlaps object then
+        Return True
+    Endif
+    Return False
+EndFunction
+
+
+Procedure update_score(score, high_score)
+    score = score + 1
+    If score > high_score then
+        high_score = score
+    Endif
+    Return score, high_score
+EndProcedure
+
+
+Procedure game_loop()
+    score = 0
+    high_score = load_high_score()
+    is_game_finished = False
+
+    While is_game_finished = False
+        tilt_direction = get_tilt_direction()
+        tilt_angle = get_tilt_angle()
+        volume = get_sound_volume()
+
+        move_character(tilt_direction)
+        update_charge(volume, tilt_angle)
+        update_character()
+
+        If check_collision(character, obstacle) then
+            is_game_finished = True
+            Output "Game over"
+        Endif
+
+        score, high_score = update_score(score, high_score)
+        render_frame(character.x, character.y, score, charge_time)
+    EndWhile
+
+    save_score(score, high_score)
+    Return score
+EndProcedure
