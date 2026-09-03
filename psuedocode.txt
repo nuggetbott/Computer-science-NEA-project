@@ -13,6 +13,16 @@ Function validation(username,password)
     Return TRUE
 EndFunction
 
+#Validate username & password
+If username = "" or password = "" then
+    Output "Error,  username or password cannt be empty"
+Endif
+If  " " in username  or " " in password then
+    Output "Error, username or password cannot contain spaces"
+Endif
+
+
+
 
 Function check_exist_user(username)
     Open "account.txt" For reading
