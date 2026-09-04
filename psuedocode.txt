@@ -131,4 +131,24 @@ Function get_landmarks(face_region)
 EndFunction
 
 Function eyebrow_raised()
-     
+
+
+
+
+
+# initialise game screen
+screen = screen(screen_width, screen_length)
+clock = game_clock
+run = TRUE
+While run then 
+	for events in game_event then
+		If event = QUIT then
+		run = FALSE
+		Endif
+	Endfor
+	screen.color(white)
+	display.update()
+	clock(60)
+Endwhile
+screen.exit()
+	
