@@ -158,7 +158,6 @@ screen.exit()
 #Saving/load system
 save_file = "save_file.json"
 
-
 Function load_game():
     If save_file does not exist then
         Return not exist
