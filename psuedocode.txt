@@ -58,7 +58,8 @@ Function register()
     If validation(username,password) = FALSE then
         Return
     Endif
-    store_acc(username, password)
+    store_acc(username, password) 
+    create_savings()
     Output "Account created successfully"
 EndFunction
 
@@ -156,18 +157,31 @@ screen.exit()
 
 #Saving/load system
 save_file = "save_file.json"
+
+
 Function load_game():
     If save_file does not exist then
         Return not exist
     Endif
     Open "save_file.son" for reading 
-    Read JSON data 
+        Read JSON data 
     Convert JSON data into game data
     Close "save_file.json"
 EndFunction
 
-Function create_acc():
+Function create_savings():
     If save_file does not exist then
         Create "save_file.json"
         Create default account
-        
+        Return "Savings created"
+    Return "file already exists"
+EndFunction
+
+Function save_game():
+    Convert game_data into JSON
+    Open save_file for writing
+        Write game_data
+    Close save_file
+    Return "Game saved successfully"
+
+
