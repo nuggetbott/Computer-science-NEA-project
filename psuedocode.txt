@@ -152,3 +152,22 @@ While run then
 Endwhile
 screen.exit()
 	
+
+
+#Saving/load system
+save_file = "save_file.json"
+Function load_game():
+    If save_file does not exist then
+        Return not exist
+    Endif
+    Open "save_file.son" for reading 
+    Read JSON data 
+    Convert JSON data into game data
+    Close "save_file.json"
+EndFunction
+
+Function create_acc():
+    If save_file does not exist then
+        Create "save_file.json"
+        Create default account
+        
