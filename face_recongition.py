@@ -53,11 +53,11 @@ def detect_eyebrow_raised(result):
         eyebrow_gap = (eyebrow.y - eye.y)*100
         right_eye = landmarks[33] # corner on right eye
         left_eye = landmarks[263] # corner on left eye
-        eye_width = right_eye.x - left_eye.x
+        eye_width = left_eye.x - right_eye.x
         relative_eyebrow_gap = eyebrow_gap / eye_width # Find relative gap between eyebrow and eye based on eye width, to remove distance factor
-        if relative_eyebrow_gap > 0.15:  # Adjust this threshold 
+        if relative_eyebrow_gap > 46:  # Adjust this threshold 
             print("eyebrow raised")
-        return eyebrow_gap
+        return relative_eyebrow_gap
     return None
 
 with vision.FaceLandmarker.create_from_options(options) as landmarker:
