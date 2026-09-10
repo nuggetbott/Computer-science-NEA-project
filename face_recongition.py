@@ -51,10 +51,15 @@ def detect_eyebrow_raised(result):
         eye = landmarks[65]
         eyebrow = landmarks[145]
         eyebrow_gap = (eyebrow.y - eye.y)*100
-        if eyebrow_gap > 8 :
+        right_eye = landmarks[33] # corner on right eye
+        left_eye = landmarks[263] # corner on left eye
+        eye_width = right_eye.x - left_eye.x
+        relative_eyebrow_gap = eyebrow_gap / eye_width # Find relative gap between eyebrow and eye based on eye width, to remove distance factor
+        if relative_eyebrow_gap > 0.15:  # Adjust this threshold 
             print("eyebrow raised")
         return eyebrow_gap
     return None
+
 with vision.FaceLandmarker.create_from_options(options) as landmarker:
     cap = cv2.VideoCapture(0) # Opens the webcam
     if not cap.isOpened():
