@@ -58,7 +58,11 @@ Function register()
     If validation(username,password) = FALSE then
         Return
     Endif
-    store_acc(username, password) 
+    create UUID # unique identifier for each player
+    If UUID already exist then
+        create new_UUID
+    Endif
+    store_acc(username, password,UUID) 
     create_savings()
     Output "Account created successfully"
 EndFunction
