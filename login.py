@@ -1,5 +1,6 @@
 import hashlib 
 import tkinter as tk
+import uuid
 from tkinter import messagebox
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
@@ -27,10 +28,10 @@ def validation(username, password):
         return False
     return True
 
-def store_acc(username, password):
+def store_acc(username, password, UUID):
     hashed_password = hash_password(password)
     with open("account.txt", "a") as f:
-        f.write(f"{username},{hashed_password}\n")
+        f.write(f"{username},{hashed_password},{UUID}\n")
 
 
 def register():
@@ -48,8 +49,8 @@ def register():
     if check_exist_user(username):
         messagebox.showerror("Error", "Account already exists.")
         return
-
-    store_acc(username, password)
+    UUID = str(uuid.uuid4())
+    store_acc(username, password,UUID)
     messagebox.showinfo("Success", "Account created successfully.")
 
 def login():
@@ -60,7 +61,7 @@ def login():
     try:
         with open("account.txt", "r") as f:
             for line in f:
-                stored_username, stored_password = line.strip().split(",")
+                stored_username, stored_password = line.strip().split(",")[:2]
                 if stored_username == username and stored_password == hashed_password:
                     messagebox.showinfo("Success", "Login successful.")
                     print("Login result: True")
