@@ -155,6 +155,31 @@ Endwhile
 screen.exit()
 	
 
+#initialse game
+Procedure initialise_game()
+    settings = load_settings
+    save_data = load_save(current_uuid)
+    If save_data exist then
+        current_checkpoint = save_data.current_checkpoint
+        current_chapter = save_data.current_chapter
+        chapter_unlocked = save_data.chapters_unlocked
+        unlocked_items = save_data.unlocked_items
+    Else 
+        current_chapter = 1
+        current_checkpoint= 0
+        chapter_unlocked = [1]
+        unlocked_items = ["basic"]
+    Endif
+    score = 0 
+    live = 3 
+    chapter_data = load_chapter(current_chapter) 
+    start_webcam()
+    start_microphone()
+EndProcedure
+
+
+
+
 
 #Saving/load system
 save_file = "save_file.json"
@@ -190,4 +215,4 @@ Function save_game():
     else:
         Return "Error-Game not saved"
 
->>>>>>> 5a8ab1626f93d1ed2afaaa347eab2d3d3f2ae6fa
+
