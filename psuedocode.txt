@@ -178,6 +178,38 @@ Procedure initialise_game()
 EndProcedure
 
 
+#Loading up player_sprite
+Class player()
+    Function init(self,x,y,width,height,velocity,img_path,scale_factor)
+        private velocity = velocity
+        private is_jump = FALSE
+        private jump_velocity = jump_velocity
+        private hold_jump = FALSE
+        private gravity = gravity
+        private character = img_path
+         
+    Procedure draw_player(self,screen)
+        Draw player on screen at x,y
+    EndProcedure
+
+    Function input_handling()
+        If hold_jump is TRUE then  
+            If "D" is pressed then 
+                Compress character by squeeze_factor
+                Increase stored_energy by elastic_pot_factor
+                Rotate charcter increasingly clockwise
+            Elif "A" is pressed then
+                Compress character by squeeze_factor
+                Increase stored_energy by elastic_pot_factor
+                Rotate charcter increasingly Anticlockwise
+    
+    Function apply_gravity(self)
+        
+
+
+
+
+
 
 
 
