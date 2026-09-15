@@ -204,7 +204,11 @@ Class player()
                 Rotate charcter increasingly Anticlockwise
     
     Function apply_gravity(self)
-        
+        private gravity = 1
+        If character not on ground then
+            character.y = character.y - gravity
+            
+
 
 
 
