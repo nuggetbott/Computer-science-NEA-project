@@ -48,7 +48,7 @@ Procedure store_acc(username, password)
 EndProcedure
 
 
-Function register()
+Procedure register()
     username # value from entry_username
     If check_exist_user(username) then
         Output "Account already exist"
@@ -65,7 +65,7 @@ Function register()
     store_acc(username, password,UUID) 
     create_savings()
     Output "Account created successfully"
-EndFunction
+EndProcedure
 
 
 Function login()
@@ -135,7 +135,8 @@ Function get_landmarks(face_region)
     Return landmarks
 EndFunction
 
-Function eyebrow_raised()
+Procedure eyebrow_raised()
+EndProcedure
 
 
 # initialise game screen
@@ -179,48 +180,70 @@ EndProcedure
 
 #Loading up player_sprite
 Class player()
-    Function init(self,x,y,width,height,velocity,img_path,scale_factor)
+    Procedure init(self,x,y,width,height,img_path,scale_factor)
         self.x = x
         self.y = y
+        self.y_velocity =0
+        self.x_velocity = 0
         self.width = width
         self.height = height
-        self.velocity = velocity
-        self.is_jump = FALSE
+        self.is_ground = TRUE
         self.jump_velocity = 0
         self.hold_jump = FALSE
         self.gravity = 1
+        self.charge = 0
+        self.max_charge = 100
+        self.angle = 0 
+        self.min_angle = -80
+        self.max_angle = 80
         self.character = img_path
         self.scale_factor = scale_factor
-    EndFunction
+    EndProcedure
 
     Procedure draw_player(self,screen)
         Draw player on screen at self.x, self.y
     EndProcedure
 
-    Function charge_jump(self)
+    Procedure charge_jump(self)
         If self.is_ground = TRUE then
             self.hold_jump = True
             self.charge = self.charge +1
+            If self.charge >self.max_charge then 
+                self.charge = self.max_charge
+            EndIf
+        
+            If "a" is pressed then 
+                self.angle = self.angle - 5
+            Elif "d" is pressed then 
+                self.angle = self.angle + 5
+            EndIf
+            if self.angle > self.max_angle then
+                self.angle = self.max_angle
+            Elif self.angle < self.min_angle then
+                self.angle = self.min_angle
+            EndIf
         EndIf
-        If self.charge >self.max_charge then 
-            self.charge = self.max_charge
-        EndIf
-    EndFunction
+    EndProcedure
 
-    Function release_jump(self)
+        Procedure release_jump(self)
         If self.hold_jump = TRUE then 
             self.jump_force = self.charge
-            self.y = self.y - self.jump_force
+            self.y_velocity = -(self.charge * cos(self.angle))
+            self.x_velocity = self.charge * sin(self.angle)
             self.is_ground = FALSE
             self.charge = 0 
             self.hold_jump = FALSE
-    EndFunction
-
-    Function apply_gravity(self)
-        If self.character not on ground then
-            self.y = self.y - self.gravity
         EndIf
-    EndFunction
+    EndProcedure
+
+    Procedure apply_gravity(self)
+        If not self.is_ground then
+            self.y_velocity = self.y_velocity + self.gravity
+            self.y = self.y + self.y_velocity
+            self.x = self.x + self.x_velocity
+
+        EndIf
+    EndProcedure
 EndClass
 
 
