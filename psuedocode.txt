@@ -153,7 +153,6 @@ While run then
 	clock(60)
 Endwhile
 screen.exit()
-	
 
 #initialse game
 Procedure initialise_game()
@@ -181,33 +180,48 @@ EndProcedure
 #Loading up player_sprite
 Class player()
     Function init(self,x,y,width,height,velocity,img_path,scale_factor)
-        private velocity = velocity
-        private is_jump = FALSE
-        private jump_velocity = jump_velocity
-        private hold_jump = FALSE
-        private gravity = gravity
-        private character = img_path
-         
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.velocity = velocity
+        self.is_jump = FALSE
+        self.jump_velocity = 0
+        self.hold_jump = FALSE
+        self.gravity = 1
+        self.character = img_path
+        self.scale_factor = scale_factor
+    EndFunction
+
     Procedure draw_player(self,screen)
-        Draw player on screen at x,y
+        Draw player on screen at self.x, self.y
     EndProcedure
 
-    Function input_handling()
-        If hold_jump is TRUE then  
-            If "D" is pressed then 
-                Compress character by squeeze_factor
-                Increase stored_energy by elastic_pot_factor
-                Rotate charcter increasingly clockwise
-            Elif "A" is pressed then
-                Compress character by squeeze_factor
-                Increase stored_energy by elastic_pot_factor
-                Rotate charcter increasingly Anticlockwise
-    
+    Function charge_jump(self)
+        If self.is_ground = TRUE then
+            self.hold_jump = True
+            self.charge = self.charge +1
+        EndIf
+        If self.charge >self.max_charge then 
+            self.charge = self.max_charge
+        EndIf
+    EndFunction
+
+    Function release_jump(self)
+        If self.hold_jump = TRUE then 
+            self.jump_force = self.charge
+            self.y = self.y - self.jump_force
+            self.is_ground = FALSE
+            self.charge = 0 
+            self.hold_jump = FALSE
+    EndFunction
+
     Function apply_gravity(self)
-        private gravity = 1
-        If character not on ground then
-            character.y = character.y - gravity
-            
+        If self.character not on ground then
+            self.y = self.y - self.gravity
+        EndIf
+    EndFunction
+EndClass
 
 
 
