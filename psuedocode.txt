@@ -241,7 +241,6 @@ Class player()
             self.y_velocity = self.y_velocity + self.gravity
             self.y = self.y + self.y_velocity
             self.x = self.x + self.x_velocity
-
         EndIf
     EndProcedure
 
@@ -254,13 +253,6 @@ Class player()
         
     EndProcedure
 EndClass
-
-
-
-
-
-
-
 
 
 #Saving/load system

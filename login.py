@@ -50,7 +50,7 @@ def register():
         messagebox.showerror("Error", "Account already exists.")
         return
     UUID = str(uuid.uuid4())
-    store_acc(username, password,UUID)
+    store_acc(username,password,UUID)
     messagebox.showinfo("Success", "Account created successfully.")
 
 def login():
