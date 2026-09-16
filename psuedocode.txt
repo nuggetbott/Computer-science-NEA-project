@@ -244,6 +244,15 @@ Class player()
 
         EndIf
     EndProcedure
+
+    Procedure check_collision(self)
+
+
+    Procedure update()
+        player.apply_gravity()
+        player.check_collision()
+        
+    EndProcedure
 EndClass
 
 
