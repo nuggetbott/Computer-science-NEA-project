@@ -245,6 +245,15 @@ Class player()
     EndProcedure
 
     Procedure check_collision(self)
+        player_rect = Rect(
+            self.x
+            self.y
+            self.width
+            self.height
+        )
+
+        if player_rect overlaps object_rect then 
+            
 
 
     Procedure update()
@@ -253,6 +262,34 @@ Class player()
         
     EndProcedure
 EndClass
+
+#game objects
+class game_objects()
+    Procedure init(self,x,y,width,height,scale_factor,image)
+        self.image = image
+        self.width = width
+        self.height = height 
+        self.x = x 
+        self.y = y 
+        self.scale_factor = scale_factor
+    EndProcedure
+
+    Procedure hitbox()
+        object_rect = Rect(
+            self.x 
+            self.y
+            self.width
+            self.height
+        )
+    EndProcedure
+
+    Procedure movey_move()
+        If is moveable then:
+             self.y_velocity = speed_y
+             self.x_velocity = speed_x
+             self.x = self.x + self.x_velocity
+             self.y = self.y + self.y_velocity
+    
 
 
 #Saving/load system
