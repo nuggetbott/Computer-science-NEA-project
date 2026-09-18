@@ -265,16 +265,19 @@ EndClass
 
 #game objects
 class game_objects()
-    Procedure init(self,x,y,width,height,scale_factor,image)
+    Procedure init(self,x,y,width,height,moving,scale_factor,image)
         self.image = image
         self.width = width
         self.height = height 
         self.x = x 
         self.y = y 
         self.scale_factor = scale_factor
+        self.moving = moving 
+        self.x_velocity = 0
+        self.y_velocity = 0
     EndProcedure
 
-    Procedure hitbox()
+    Procedure hitbox(self)
         object_rect = Rect(
             self.x 
             self.y
@@ -283,8 +286,8 @@ class game_objects()
         )
     EndProcedure
 
-    Procedure movey_move()
-        If is moveable then:
+    Procedure movey_move(self)
+        If is self.moving then:
              self.y_velocity = speed_y
              self.x_velocity = speed_x
              self.x = self.x + self.x_velocity

@@ -28,7 +28,7 @@ class player:
         self.scale_factor = scale_factor
 
     def draw(self,screen):
-        
+        return
 
 while run:
     for event in pygame.event.get():
