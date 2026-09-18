@@ -307,6 +307,7 @@ Function load_game():
         Read JSON data 
     Convert JSON data into game data
     Close "save_file.json"
+	Return "acc loaded successfully"
 EndFunction
 
 Function create_savings():
@@ -328,5 +329,6 @@ Function save_game():
         Return "Game saved successfully"
     else:
         Return "Error-Game not saved"
+EndFunction
 
 
