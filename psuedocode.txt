@@ -278,12 +278,7 @@ class game_objects()
     EndProcedure
 
     Procedure hitbox(self)
-        object_rect = Rect(
-            self.x 
-            self.y
-            self.width
-            self.height
-        )
+        self.rect = Rect(self.x,self.y,self.width,self.height)
     EndProcedure
 
     Procedure movey_move(self)
@@ -332,3 +327,22 @@ Function save_game():
 EndFunction
 
 
+#Map Loading
+Function load_map(screen,map_data,world_offset)
+    For layers in map_data 
+        For tiles in layers 
+            If tile exist then
+                x_pixel = tile[0] * pixel_size + world_offset_x
+                y_pixel = tile[1] * pixel_size + world_offset_y
+                Add tile to screen
+            EndIf
+        EndFor
+    EndFor
+EndFunction
+
+
+Function get_world_offset()
+    world_offset_x = player.x - (screen_length/2)
+    world_offset_y = player.y - (screen_width/2)
+    Return world_offset_x, world_offset_y
+EndFunction
