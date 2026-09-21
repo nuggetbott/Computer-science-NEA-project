@@ -332,8 +332,9 @@ Procedure load_map(screen,map_data,world_offset)
     For layers in map_data 
         For tiles in layers 
             If tile exist then
+                world_offset_x , world_offset_y = get_world_offset()
                 x_pixel = tile[0] * pixel_size + world_offset_x
-                y_pixel = tile[1] * pixel_size + world_offset_y
+                y_pixel = tile[1] * pixel_size + world_offset_ys
                 Add tile to screen
             EndIf
         EndFor
@@ -341,8 +342,8 @@ Procedure load_map(screen,map_data,world_offset)
 EndProcedure
 
 
-Function get_world_offset()
-    world_offset_x = player.x - (screen_length/2)
-    world_offset_y = player.y - (screen_width/2)
+Function get_world_offset(player, screen_width, screen_height)
+    world_offset_x = player.x - (screen_width/2)
+    world_offset_y = player.y - (screen_height/2)
     Return world_offset_x, world_offset_y
 EndFunction
