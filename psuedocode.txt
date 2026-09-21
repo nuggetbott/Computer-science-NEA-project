@@ -334,7 +334,7 @@ Procedure load_map(screen,map_data,world_offset)
             If tile exist then
                 world_offset_x , world_offset_y = get_world_offset()
                 x_pixel = tile[0] * pixel_size + world_offset_x
-                y_pixel = tile[1] * pixel_size + world_offset_ys
+                y_pixel = tile[1] * pixel_size + world_offset_y
                 Add tile to screen
             EndIf
         EndFor
