@@ -347,3 +347,19 @@ Function get_world_offset(player, screen_width, screen_height)
     world_offset_y = player.y - (screen_height/2)
     Return world_offset_x, world_offset_y
 EndFunction
+
+Function check_map_collision(player,map_data)
+    For layers in map_data
+        If is object then
+            if layer.name = "deadly"
+                For obj in layer 
+                    obj.rect = Rect(obj.x, obj.y, obj.width, obj.height)
+                    IF player.rect collides with obj.rect then
+                        return hit 
+                    EndIf
+                EndFor
+            EndIf
+        EndIf
+    EndFor
+    return None
+EndFunction
