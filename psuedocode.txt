@@ -328,7 +328,7 @@ EndFunction
 
 
 #Map Loading
-Function load_map(screen,map_data,world_offset)
+Procedure load_map(screen,map_data,world_offset)
     For layers in map_data 
         For tiles in layers 
             If tile exist then
@@ -338,7 +338,7 @@ Function load_map(screen,map_data,world_offset)
             EndIf
         EndFor
     EndFor
-EndFunction
+EndProcedure
 
 
 Function get_world_offset()
