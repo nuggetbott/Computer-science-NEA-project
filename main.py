@@ -9,7 +9,7 @@ clock = pygame.time.Clock()
 run = True
 tmx_data = load_pygame("map.tmx")
 ti = tmx_data.get_tile_image_by_gid
-
+keys = pygame.key.get_pressed()
 def get_world_offset(player,screen_width,screen_height):
     world_offset_x = player.x - (screen_width/2)
     world_offset_y = player.y - (screen_height/2)
@@ -48,6 +48,22 @@ class player:
     def draw(self,screen):
         return
 
+    def charge_jump(self):
+        if self.is_ground == True:
+            if keys[pygame.K_SPACE]:
+                self.charge += 1
+                if self.charge > self.max_charge:
+                    self.charge = self.max_charge
+                if keys[pygame.K_a]:
+                    self.angle -= 1
+                    if self.angle < self.min_angle:
+                        self.angle = self.min_angle
+                if keys[pygame.K_d]:
+                    self.angle += 1
+                    if self.angle > self.max_angle:
+                        self.angle = self.max_angle
+                
+                
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

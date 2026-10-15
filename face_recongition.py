@@ -30,6 +30,7 @@ options = vision.FaceLandmarkerOptions(  # required options for the face landmar
 def draw_landmark(frame,result,no):
     if not result.face_landmarks:  # if no face is detected, return
         return
+    h,w,_ = frame.shape
     landmarks = result.face_landmarks[0] # set landmark as the first face detected
     pixel_x = int(landmarks[no].x*w) # turn the normalised value into actual frame width
     pixel_y = int(landmarks[no].y*h) # turn the normalised value into actual farm length
