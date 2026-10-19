@@ -55,7 +55,7 @@ class Player:
         if self.is_ground == True:
             if keys[pygame.K_SPACE]:
                 self.hold_jump = True
-                self.charge += 1
+                self.charge += 0.2
                 if self.charge > self.max_charge:
                     self.charge = self.max_charge
                 if keys[pygame.K_a]:
