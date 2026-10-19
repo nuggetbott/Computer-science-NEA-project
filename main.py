@@ -89,8 +89,8 @@ class Player:
         self.release_jump()
         self.draw()
         return
-world_offset = get_world_offset(player,screen.get_width(),screen.get_height())
 player = Player(100, 100, 50, 50, player_sprite, 1, screen)
+world_offset = get_world_offset(player,screen.get_width(),screen.get_height())
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
