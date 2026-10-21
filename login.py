@@ -1,21 +1,27 @@
+#imports
 import hashlib 
 import tkinter as tk
 import uuid
 from tkinter import messagebox
+
+#functions
+#function to hash the password using SHA-256
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+#function to check if the user already exists in the account.txt file
 def check_exist_user(username):
     try:
-        with open("account.txt", "r") as f:
+        with open("account.txt", "r") as f: # open the account.txt file in read mode
             for line in f:
-                stored_username = line.strip().split(",")[0]
+                stored_username = line.strip().split(",")[0] # get the username from the line, index 0
                 if stored_username == username:
                     return True
     except FileNotFoundError:
         pass
     return False
 
+#function to validate the username and password
 def validation(username, password):
     if not username or not password:
         messagebox.showerror("Error", "Username or password cannot be empty.")
@@ -28,12 +34,13 @@ def validation(username, password):
         return False
     return True
 
+#funtion to store the account information in the account.txt file
 def store_acc(username, password, UUID):
     hashed_password = hash_password(password)
     with open("account.txt", "a") as f:
         f.write(f"{username},{hashed_password},{UUID}\n")
 
-
+#function to register a new user
 def register():
     username = entry_username.get()
     password = entry_password.get()
@@ -53,6 +60,7 @@ def register():
     store_acc(username,password,UUID)
     messagebox.showinfo("Success", "Account created successfully.")
 
+#function to login a user
 def login():
     username = entry_username.get()
     password = entry_password.get()
@@ -73,6 +81,8 @@ def login():
     print("Login result: False")
     return False
 
+#main program
+# Create the GUI
 root = tk.Tk()
 root.title("Login/Register")
 tk.Label(root,text="username").grid(row=0, column=0, padx=10, pady=10)
