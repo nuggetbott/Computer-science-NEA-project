@@ -1,5 +1,5 @@
 {
-    "activeFile": "chap1_map.tmx",
+    "activeFile": "testmap.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -8,11 +8,11 @@
             "scaleInDock": 1
         },
         "chap1_map.tmx": {
-            "scale": 8,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1181.8125,
-                "y": 5004
+                "x": 1163.6666666666665,
+                "y": 4992.166666666666
             }
         },
         "chapter1_underground_tilesheet.tsx": {
@@ -27,6 +27,14 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "testmap.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 232.25,
+                "y": 99
+            }
+        },
         "tile_map (real).tsx": {
             "scaleInDock": 2,
             "scaleInEditor": 1
@@ -37,18 +45,22 @@
         }
     },
     "last.imagePath": "C:/Users/kedri/Desktop/projects/Computer science NEA",
-    "map.fixedSize": false,
+    "map.fixedSize": true,
+    "map.height": 40,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 100,
     "openFiles": [
         "tile_map (real).tsx",
-        "chap1_map.tmx"
+        "chap1_map.tmx",
+        "testmap.tmx"
     ],
     "project": "computer scince nea.tiled-project",
     "recentFiles": [
         "tile_map (real).tsx",
         "chap1_map.tmx",
+        "testmap.tmx",
         "chapter1_underground_tilesheet.tsx",
         "chapter1_underground_tilesheet_v2.tsx",
         "dirt.tsx",

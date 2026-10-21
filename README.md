@@ -41,12 +41,12 @@ Tip: Replace this paragraph with your project aim, success criteria, and a short
    git clone https://github.com/nuggetbott/Computer-science-NEA-project.git
 2. Change into the project directory:
    cd Computer-science-NEA-project
-3. Create and activate a virtual environment (recommended):
-   python -m venv venv
+3. Create and activate a virtual environment (recommended). On Windows, use Python 3.13 because Python 3.14 does not currently have a compatible `pygame` wheel:
+   py -3.13 -m venv venv
    - On macOS/Linux: source venv/bin/activate
    - On Windows (PowerShell): .\venv\Scripts\Activate.ps1
 4. Install dependencies:
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
 
 If you don't have a requirements.txt yet, create one by listing the libraries your project uses (e.g., numpy, pandas, matplotlib, pytest, etc.).
 

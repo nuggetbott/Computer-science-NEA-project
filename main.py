@@ -1,5 +1,5 @@
 
-import face_recognition
+#import face_recongition
 import pygame
 import pytmx
 from pytmx.util_pygame import load_pygame
@@ -7,7 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode((1000, 800))
 clock = pygame.time.Clock()
 run = True
-tmx_data = load_pygame("map.tmx")
+tmx_data = load_pygame("testmap.tmx")
 player_sprite = pygame.image.load('player.png')
 ti = tmx_data.get_tile_image_by_gid
 keys = pygame.key.get_pressed()
@@ -96,6 +96,6 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         player.update()
-    screen.fill((255, 255, 255))
+        draw_map(screen,tmx_data,world_offset)
     pygame.display.update()
     clock.tick(60)

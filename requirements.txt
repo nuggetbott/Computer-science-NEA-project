@@ -1,0 +1,4 @@
+pygame==2.6.1
+pytmx==3.32
+opencv-python
+mediapipe
