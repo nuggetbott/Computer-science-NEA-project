@@ -1,0 +1,64 @@
+{
+    "activeFile": "chap1_map.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "chap1_map.tmx": {
+            "scale": 8,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1181.8125,
+                "y": 5004
+            }
+        },
+        "chapter1_underground_tilesheet.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "chapter1_underground_tilesheet_v2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "dirt.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_map (real).tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/kedri/Desktop/projects/Computer science NEA",
+    "map.fixedSize": false,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "tile_map (real).tsx",
+        "chap1_map.tmx"
+    ],
+    "project": "computer scince nea.tiled-project",
+    "recentFiles": [
+        "tile_map (real).tsx",
+        "chap1_map.tmx",
+        "chapter1_underground_tilesheet.tsx",
+        "chapter1_underground_tilesheet_v2.tsx",
+        "dirt.tsx",
+        "tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 0,
+    "tileset.spacing": 0,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
