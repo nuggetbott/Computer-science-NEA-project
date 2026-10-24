@@ -1,5 +1,5 @@
 {
-    "activeFile": "testmap.tmx",
+    "activeFile": "chap1_map.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -9,10 +9,10 @@
         },
         "chap1_map.tmx": {
             "scale": 3,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 1163.6666666666665,
-                "y": 4992.166666666666
+                "x": 1163.5,
+                "y": 4992
             }
         },
         "chapter1_underground_tilesheet.tsx": {
@@ -32,8 +32,12 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 232.25,
-                "y": 99
+                "y": 34.5
             }
+        },
+        "tile_map (real) (1).tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "tile_map (real).tsx": {
             "scaleInDock": 2,
@@ -59,8 +63,9 @@
     "project": "computer scince nea.tiled-project",
     "recentFiles": [
         "tile_map (real).tsx",
-        "chap1_map.tmx",
         "testmap.tmx",
+        "chap1_map.tmx",
+        "tile_map (real) (1).tsx",
         "chapter1_underground_tilesheet.tsx",
         "chapter1_underground_tilesheet_v2.tsx",
         "dirt.tsx",
