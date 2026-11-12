@@ -7,8 +7,8 @@ from pytmx.util_pygame import load_pygame
 pygame.init()
 
 # Show 20 tiles across and 7 tiles down.
-TILE_SIZE = 50
-COLUMNS = 20
+TILE_SIZE =80
+COLUMNS = 17
 ROWS = 7
 
 screen = pygame.display.set_mode(

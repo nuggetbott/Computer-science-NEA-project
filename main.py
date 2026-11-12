@@ -4,12 +4,17 @@ import pygame
 import pytmx
 from pytmx.util_pygame import load_pygame
 pygame.init()
-screen = pygame.display.set_mode((1000, 800))
+tile_size = 80
+Columns = 17
+Rows = 7 
+scaled_tiles = {}
+screen = pygame.display.set_mode((Columns * tile_size, Rows * tile_size))
 clock = pygame.time.Clock()
 run = True
 tmx_data = load_pygame("testmap.tmx")
 player_sprite = pygame.image.load('player.png')
 ti = tmx_data.get_tile_image_by_gid
+
 keys = pygame.key.get_pressed()
 def get_world_offset(player,screen_width,screen_height):
     world_offset_x = player.x - (screen_width/2)
@@ -20,9 +25,12 @@ def draw_map(screen,tmx_data,world_offset):
         if isinstance(layer, pytmx.TiledTileLayer):
             for x ,y , gid in layer:
                 tile = ti(gid)
-                if tile:
-                    screen.blit(tile, (x * tmx_data.tilewidth - world_offset[0], y * tmx_data.tileheight - world_offset[1]))
-
+                if gid not in scaled_tiles:
+                    tile = tmx_data.get_tile_image_by_gid(gid)
+                    if tile:
+                            scaled_tiles[gid] = pygame.transform.scale(
+                                tile, (tile_size, tile_size)
+                            )
 
 
 class Player:
