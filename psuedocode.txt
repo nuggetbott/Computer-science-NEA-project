@@ -364,3 +364,9 @@ Function check_map_collision(player,map_data)
     EndFor
     return None
 EndFunction
+
+
+#putting tile map on to screen proportinally
+tile_size = 50
+column = 20
+row = 7

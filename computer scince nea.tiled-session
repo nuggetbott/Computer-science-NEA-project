@@ -28,11 +28,11 @@
             "scaleInEditor": 1
         },
         "testmap.tmx": {
-            "scale": 8,
+            "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 88.9375,
-                "y": 61
+                "x": 105.375,
+                "y": 83.75
             }
         },
         "testmap.tmx#tile_map": {
