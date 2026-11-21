@@ -20,17 +20,25 @@ def get_world_offset(player,screen_width,screen_height):
     world_offset_x = player.x - (screen_width/2)
     world_offset_y = player.y - (screen_height/2)
     return world_offset_x, world_offset_y
+
 def draw_map(screen,tmx_data,world_offset):
     for layer in tmx_data.visible_layers:
         if isinstance(layer, pytmx.TiledTileLayer):
             for x ,y , gid in layer:
-                tile = ti(gid)
+                tile = scaled_tiles(gid)
                 if gid not in scaled_tiles:
                     tile = tmx_data.get_tile_image_by_gid(gid)
                     if tile:
                             scaled_tiles[gid] = pygame.transform.scale(
                                 tile, (tile_size, tile_size)
                             )
+                            screen.blit(
+                                        tile,
+                                            (
+                                            round(x * tile_size - camera_x),
+                                            round(y * tile_size - camera_y),
+                                                ),
+                                            )
 
 
 class Player:
@@ -99,6 +107,7 @@ class Player:
         return
 player = Player(100, 100, 50, 50, player_sprite, 1, screen)
 world_offset = get_world_offset(player,screen.get_width(),screen.get_height())
+
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
