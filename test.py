@@ -9,7 +9,7 @@ pygame.init()
 # Show 20 tiles across and 7 tiles down.
 TILE_SIZE =80
 COLUMNS = 17
-ROWS = 7
+ROWS = 9
 
 screen = pygame.display.set_mode(
     (COLUMNS * TILE_SIZE, ROWS * TILE_SIZE)

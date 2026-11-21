@@ -28,15 +28,15 @@
             "scaleInEditor": 1
         },
         "testmap.tmx": {
-            "scale": 4,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 105.375,
-                "y": 83.75
+                "x": 189.16666666666669,
+                "y": 88.66666666666667
             }
         },
         "testmap.tmx#tile_map": {
-            "scaleInDock": 4,
+            "scaleInDock": 2,
             "scaleInEditor": 1
         },
         "tile_map (real) (1).tsx": {
