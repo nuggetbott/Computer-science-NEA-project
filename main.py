@@ -3,6 +3,7 @@
 import pygame
 import pytmx
 from pytmx.util_pygame import load_pygame
+
 pygame.init()
 tile_size = 80
 Columns = 17
@@ -11,8 +12,8 @@ scaled_tiles = {}
 screen = pygame.display.set_mode((Columns * tile_size, Rows * tile_size))
 clock = pygame.time.Clock()
 run = True
-tmx_data = load_pygame("testmap.tmx")
-player_sprite = pygame.image.load('player.png')
+tmx_data = load_pygame("maps/testmap.tmx")
+player_sprite = pygame.image.load("pixel_art/player.png")
 ti = tmx_data.get_tile_image_by_gid
 
 keys = pygame.key.get_pressed()
