@@ -18,8 +18,17 @@ ti = tmx_data.get_tile_image_by_gid
 
 keys = pygame.key.get_pressed()
 def get_world_offset(player,screen_width,screen_height):
+    map_width = tmx_data.width *tile_size
+    map_height = tmx_data.height * tile_size
+
     world_offset_x = player.x + player.width / 2 - screen_width / 2
     world_offset_y = player.y + player.height / 2 - screen_height / 2
+    
+    if map_width > screen_width:
+        world_offset_x = max(0, min(world_offset_x, map_width  - screen_width))
+    if map_height > screen_height:
+        world_offset_y = max(0, min(world_offset_y, map_height  - screen_height))
+        
     return world_offset_x, world_offset_y
 
 def draw_map(screen,tmx_data,world_offset):
