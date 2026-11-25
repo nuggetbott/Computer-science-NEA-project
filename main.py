@@ -64,7 +64,7 @@ class Player:
         self.width = width
         self.height = height
         self.rect = pygame.Rect(x, y, width, height)
-        self.is_ground = True
+        self.is_ground = False
         self.jump_velocity = 0
         self.hold_jump = False
         self.gravity = 1
@@ -130,8 +130,15 @@ class Player:
         return
 
     def check_boudaries(self):
+        collide_list = floor_rects[self.rect.collidelist(floor_rects)]
         if self.rect.collidelist(floor_rects) != -1:
             print(floor_rects[self.rect.collidelist(floor_rects)])
+            print(floor_rects[self.rect.collidelist(floor_rects)][0])
+            self.x = collide_list[0].bottom
+            self.y = collide_list[1] - tile_size + 30
+            self.is_ground = True
+        else:
+            self.is_ground = False
 
 
 
