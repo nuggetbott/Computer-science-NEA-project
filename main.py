@@ -132,12 +132,26 @@ class Player:
     def check_boudaries(self):
         next_x = int(self.x + self.x_velocity)
         x_predict = pygame.Rect(next_x , self.rect.y , self.width, self.height)
+        next_y =  int(self.y + self.y_velocity)
+        y_predict = pygame.Rect(next_x , self.rect.y , self.width, self.height)
         for tile in floor_rects:
             if x_predict.colliderect(tile):
                 if self.x_velocity >0:
                     self.x = float(tile.left - self. width)
                 elif self.x_velocity < 0 :
                     self.x = float(tile.right) 
+                self.x_velocity = 0
+                break
+        for tile in floor_rects:
+            if y_predict.colliderect(tile):
+                if self.y_velocity >0:
+                     self.y = float(tile.top - self.height)
+                elif self.y_velocity < 0 :
+                     self.y = float(tile.bottom) 
+                self.y_velocity = 0
+                break
+                
+        
                 
                 
 
