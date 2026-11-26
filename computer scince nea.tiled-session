@@ -1,6 +1,7 @@
 {
-    "activeFile": "testmap.tmx",
+    "activeFile": "maps/testmap.tmx",
     "expandedProjectPaths": [
+        "maps",
         "."
     ],
     "fileStates": {
@@ -24,6 +25,21 @@
             "scaleInEditor": 1
         },
         "dirt.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/testmap.tmx": {
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 268.25,
+                "y": 214
+            }
+        },
+        "maps/testmap.tmx#tile_map": {
+            "scaleInDock": 1
+        },
+        "maps/tile_set.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -65,10 +81,13 @@
     "map.tileWidth": 16,
     "map.width": 100,
     "openFiles": [
-        "testmap.tmx"
+        "maps/testmap.tmx",
+        "maps/tile_set.tsx"
     ],
     "project": "computer scince nea.tiled-project",
     "recentFiles": [
+        "maps/tile_set.tsx",
+        "maps/testmap.tmx",
         "chap1_map.tmx",
         "testmap.tmx",
         "tile_map.tsx",
