@@ -56,8 +56,8 @@
             "scaleInEditor": 1
         }
     },
-    "last.externalTilesetPath": "C:/Users/kedri/Desktop/projects/Computer science NEA",
-    "last.imagePath": "C:/Users/kedri/Desktop/projects/Computer science NEA",
+    "last.externalTilesetPath": "C:/Users/kedri/Desktop/projects/Computer science NEA/pixel_art",
+    "last.imagePath": "C:/Users/kedri/Desktop/projects/Computer science NEA/pixel_art",
     "map.fixedSize": true,
     "map.height": 40,
     "map.lastUsedFormat": "tmx",
@@ -69,9 +69,9 @@
     ],
     "project": "computer scince nea.tiled-project",
     "recentFiles": [
+        "chap1_map.tmx",
         "testmap.tmx",
         "tile_map.tsx",
-        "chap1_map.tmx",
         "tile_map (real) (1).tsx",
         "tile_map (real).tsx",
         "chapter1_underground_tilesheet.tsx",
@@ -79,7 +79,7 @@
         "dirt.tsx",
         "tileset.tsx"
     ],
-    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFilter": "All Files (*)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 0,
     "tileset.spacing": 0,
