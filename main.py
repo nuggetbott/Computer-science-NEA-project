@@ -23,7 +23,7 @@ def get_world_offset(player, screen_width, screen_height):
     map_height = tmx_data.height * tile_size
 
     world_offset_x = player.x + player.width / 2 - screen_width / 2
-    world_offset_y = player.y + player.height / 2 - screen_height / 2
+    world_offset_y = player.y + player.height / 2 - screen_height / 2 - 160
 
     if map_width > screen_width:
         world_offset_x = max(0, min(world_offset_x, map_width - screen_width))
@@ -116,47 +116,53 @@ class Player:
     def apply_gravity(self):
         if not self.is_ground:
             self.y_velocity += self.gravity
-            self.y += self.y_velocity
-            self.x += self.x_velocity
+
 
     def update(self):
         self.apply_gravity()
-        self.charge_jump()
-        self.release_jump()
-        self.draw()
+        self.rect.x = self.x
+        self.rect.y = self.y
         self.check_boudaries()
         self.rect.x = self.x
         self.rect.y = self.y
+        self.charge_jump()
+        self.release_jump()
+        self.draw()
         return
 
     def check_boudaries(self):
+        self.is_ground = False
         next_x = int(self.x + self.x_velocity)
-        x_predict = pygame.Rect(next_x , self.rect.y , self.width, self.height)
-        next_y =  int(self.y + self.y_velocity)
-        y_predict = pygame.Rect(next_x , self.rect.y , self.width, self.height)
+        x_predict = pygame.Rect(next_x, self.rect.y, self.width, self.height)
         for tile in floor_rects:
             if x_predict.colliderect(tile):
-                if self.x_velocity >0:
-                    self.x = float(tile.left - self. width)
-                elif self.x_velocity < 0 :
-                    self.x = float(tile.right) 
+                if self.x_velocity > 0:
+                    self.x = float(tile.left - self.width)
+                elif self.x_velocity < 0:
+                    self.x = float(tile.right)
                 self.x_velocity = 0
                 break
+        else:
+            self.x = float(next_x)
+
+        next_y = int(self.y + self.y_velocity)
+        y_predict = pygame.Rect(self.x, next_y, self.width, self.height)
         for tile in floor_rects:
             if y_predict.colliderect(tile):
-                if self.y_velocity >0:
-                     self.y = float(tile.top - self.height)
-                elif self.y_velocity < 0 :
-                     self.y = float(tile.bottom) 
+                if self.y_velocity > 0:
+                    self.y = float(tile.top - self.height)
+                elif self.y_velocity < 0:
+                    self.y = float(tile.bottom)
                 self.y_velocity = 0
                 break
-                
-        
-                
-                
+        else:
+            self.y = float(next_y)
 
-
-
+        feet_check = pygame.Rect(
+            int(self.x), int(self.y + self.height), self.width, 1
+        )
+        if feet_check.collidelist(floor_rects) != -1:
+            self.is_ground = True
 player = Player(800, 400, 50, 50, player_sprite, 1, screen)
 world_offset = get_world_offset(player, screen.get_width(), screen.get_height())
 
@@ -169,26 +175,28 @@ floor_rects = [
     if gid != 0
 ]
 
-print(floor_rects)
-
+move_speed = 5
+jump_power = 5
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
-        player.x += 10
-    if keys[pygame.K_LEFT]:
-        player.x -= 10
+        player.x_velocity =  move_speed
+    elif keys[pygame.K_LEFT]:
+        player.x_velocity = -move_speed
+    if not keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
+            player.x_velocity = 0
+
     if keys[pygame.K_UP]:
-        player.y -= 10
+        player.y_velocity = -jump_power
     if keys[pygame.K_DOWN]:
-        player.y += 10
+        player.y_velocity = jump_power
 
     world_offset = get_world_offset(player, screen.get_width(), screen.get_height())
     screen.fill((0, 0, 0))
     draw_map(screen, tmx_data, world_offset)
-    player.check_boudaries()
     player.update()
     pygame.display.update()
     clock.tick(60)
